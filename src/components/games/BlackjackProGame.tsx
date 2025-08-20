@@ -220,15 +220,15 @@ export const BlackjackProGame = ({ onBack, tokens, onTokensChange }: BlackjackPr
   };
 
   const renderCard = (card: Card, hidden = false) => (
-    <div className={`w-16 h-24 bg-white rounded-lg border-2 border-gray-300 flex flex-col items-center justify-center relative shadow-lg ${hidden ? 'bg-gradient-to-br from-red-600 to-red-800' : ''}`}>
+    <div className={`w-14 h-20 sm:w-16 sm:h-24 bg-white rounded-lg border-2 border-gray-300 flex flex-col items-center justify-center relative shadow-lg ${hidden ? 'bg-gradient-to-br from-red-600 to-red-800' : ''}`}>
       {hidden ? (
-        <div className="text-white font-bold text-lg">?</div>
+        <div className="text-white font-bold text-base sm:text-lg">?</div>
       ) : (
         <>
           <div className="absolute top-1 left-1 text-xs font-bold">
             {getSuitIcon(card.suit)}
           </div>
-          <div className="text-lg font-bold text-black">
+          <div className="text-base sm:text-lg font-bold text-black">
             {card.display}
           </div>
           <div className="absolute bottom-1 right-1 text-xs font-bold rotate-180">
@@ -272,48 +272,49 @@ export const BlackjackProGame = ({ onBack, tokens, onTokensChange }: BlackjackPr
         ))}
       </div>
 
-      <div className="max-w-4xl mx-auto p-4 relative z-10">
+      <div className="max-w-4xl mx-auto p-2 sm:p-4 relative z-10">
         <Card className="bg-gradient-to-br from-black via-green-950 to-black border-4 border-yellow-400 shadow-2xl shadow-yellow-400/50 relative overflow-hidden">
           {/* Casino lights border effect */}
           <div className="absolute inset-0 rounded-lg border-2 border-yellow-400/50 animate-pulse-glow"></div>
           <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 via-green-500/10 to-yellow-400/10 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
           
-          <CardHeader className="relative z-10 bg-gradient-to-r from-green-900/50 to-amber-900/50 border-b border-yellow-400/30">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
+          <CardHeader className="relative z-10 bg-gradient-to-r from-green-900/50 to-amber-900/50 border-b border-yellow-400/30 p-4 sm:p-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-2 sm:gap-3">
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={onBack}
-                  className="text-yellow-200 hover:text-yellow-400 hover:bg-yellow-400/20"
+                  className="text-yellow-200 hover:text-yellow-400 hover:bg-yellow-400/20 text-sm sm:text-base px-2 sm:px-3 py-1 sm:py-2"
                 >
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Lobby
+                  <ArrowLeft className="w-4 h-4 mr-1 sm:mr-2" />
+                  <span className="hidden sm:inline">Back to Lobby</span>
+                  <span className="sm:hidden">Back</span>
                 </Button>
               </div>
-              <div>
-                <CardTitle className="text-2xl font-bold bg-gradient-to-r from-yellow-400 via-green-500 to-yellow-400 bg-clip-text text-transparent">
+              <div className="text-center sm:text-left flex-1">
+                <CardTitle className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-yellow-400 via-green-500 to-yellow-400 bg-clip-text text-transparent leading-tight">
                   🃏 BLACKJACK PRO 🃏
                 </CardTitle>
-                <CardDescription className="text-yellow-200">
+                <CardDescription className="text-yellow-200 text-sm sm:text-base mt-1">
                   Beat the dealer to 21! 💰
                 </CardDescription>
               </div>
-              <div className="text-right">
-                <p className="text-sm text-yellow-200 font-bold">💰 Your Balance</p>
-                <p className="text-xl font-bold bg-gradient-to-r from-yellow-400 to-amber-300 bg-clip-text text-transparent">{tokens.toLocaleString()} chips</p>
+              <div className="text-right flex-shrink-0">
+                <p className="text-xs sm:text-sm text-yellow-200 font-bold">💰 Your Balance</p>
+                <p className="text-lg sm:text-xl font-bold bg-gradient-to-r from-yellow-400 to-amber-300 bg-clip-text text-transparent">{tokens.toLocaleString()} chips</p>
               </div>
             </div>
           </CardHeader>
           
-          <CardContent className="space-y-6 relative z-10 bg-gradient-to-b from-transparent to-black/30">
+          <CardContent className="space-y-6 sm:space-y-8 relative z-10 bg-gradient-to-b from-transparent to-black/30 p-4 sm:p-6">
             {/* Betting Phase */}
             {gameState === 'betting' && (
-              <div className="text-center space-y-4">
-                <div className="text-2xl font-bold text-yellow-200 mb-4">
+              <div className="text-center space-y-6 sm:space-y-8">
+                <div className="text-xl sm:text-2xl font-bold text-yellow-200 mb-6 sm:mb-8">
                   🎰 Place Your Bet 🎰
                 </div>
-                <div className="flex justify-center items-center gap-4">
+                <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
                   <input
                     type="range"
                     min="100"
@@ -321,61 +322,63 @@ export const BlackjackProGame = ({ onBack, tokens, onTokensChange }: BlackjackPr
                     step="100"
                     value={bet}
                     onChange={(e) => setBet(parseInt(e.target.value))}
-                    className="w-64 h-2 bg-yellow-400/20 rounded-lg appearance-none cursor-pointer"
+                    className="w-full sm:w-64 h-3 sm:h-2 bg-yellow-400/20 rounded-lg appearance-none cursor-pointer"
                   />
-                  <span className="text-xl font-bold text-yellow-400 min-w-[80px]">
+                  <span className="text-lg sm:text-xl font-bold text-yellow-400 min-w-[80px] text-center">
                     {bet} chips
                   </span>
                 </div>
-                <Button
-                  onClick={dealInitialCards}
-                  disabled={bet > tokens}
-                  className="bg-gradient-to-r from-yellow-400 via-green-500 to-yellow-400 text-black border-2 border-yellow-400 shadow-lg shadow-yellow-400/50 hover:shadow-2xl hover:shadow-yellow-400/50 font-bold text-lg px-8 py-3"
-                >
-                  🎯 Deal Cards
-                </Button>
+                <div className="pt-4">
+                  <Button
+                    onClick={dealInitialCards}
+                    disabled={bet > tokens}
+                    className="bg-gradient-to-r from-yellow-400 via-green-500 to-yellow-400 text-black border-2 border-yellow-400 shadow-lg shadow-yellow-400/50 hover:shadow-2xl hover:shadow-yellow-400/50 font-bold text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 touch-target w-full sm:w-auto"
+                  >
+                    🎯 Deal Cards
+                  </Button>
+                </div>
               </div>
             )}
 
             {/* Game Phase */}
             {gameState === 'playing' && (
-              <div className="space-y-6">
+              <div className="space-y-8 sm:space-y-10">
                 {/* Dealer's Hand */}
                 <div className="text-center">
-                  <h3 className="text-xl font-bold text-yellow-200 mb-3">🃏 Dealer's Hand</h3>
-                  <div className="flex justify-center gap-2">
+                  <h3 className="text-lg sm:text-xl font-bold text-yellow-200 mb-4 sm:mb-6">🃏 Dealer's Hand</h3>
+                  <div className="flex justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
                     {dealerHand.map((card, index) => 
                       renderCard(card, index === 1) // Hide second card
                     )}
                   </div>
-                  <p className="text-yellow-200 mt-2">
+                  <p className="text-yellow-200 text-sm sm:text-base">
                     Value: {dealerHand.length > 0 ? getCardValue(dealerHand[0].value) : 0} + ?
                   </p>
                 </div>
 
                 {/* Player's Hand */}
                 <div className="text-center">
-                  <h3 className="text-xl font-bold text-yellow-200 mb-3">🎯 Your Hand</h3>
-                  <div className="flex justify-center gap-2">
+                  <h3 className="text-lg sm:text-xl font-bold text-yellow-200 mb-4 sm:mb-6">🎯 Your Hand</h3>
+                  <div className="flex justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
                     {playerHand.map((card, index) => renderCard(card))}
                   </div>
-                  <p className="text-yellow-200 mt-2">
+                  <p className="text-yellow-200 text-sm sm:text-base">
                     Value: {playerValue}
                   </p>
                 </div>
 
                 {/* Game Actions */}
-                <div className="flex justify-center gap-4">
+                <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 pt-4">
                   <Button
                     onClick={hit}
                     disabled={playerValue >= 21}
-                    className="bg-gradient-to-r from-green-400 to-green-600 text-white border-2 border-green-400 shadow-lg shadow-green-400/50 hover:shadow-2xl hover:shadow-green-400/50 font-bold"
+                    className="bg-gradient-to-r from-green-400 to-green-600 text-white border-2 border-green-400 shadow-lg shadow-green-400/50 hover:shadow-2xl hover:shadow-green-400/50 font-bold text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 touch-target"
                   >
                     🃏 Hit
                   </Button>
                   <Button
                     onClick={stand}
-                    className="bg-gradient-to-r from-red-400 to-red-600 text-white border-2 border-red-400 shadow-lg shadow-red-400/50 hover:shadow-2xl hover:shadow-red-400/50 font-bold"
+                    className="bg-gradient-to-r from-red-400 to-red-600 text-white border-2 border-red-400 shadow-lg shadow-red-400/50 hover:shadow-2xl hover:shadow-red-400/50 font-bold text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 touch-target"
                   >
                     🛑 Stand
                   </Button>
@@ -385,14 +388,14 @@ export const BlackjackProGame = ({ onBack, tokens, onTokensChange }: BlackjackPr
 
             {/* Dealer Playing */}
             {gameState === 'dealer' && (
-              <div className="text-center space-y-4">
-                <div className="text-2xl font-bold text-yellow-200">
+              <div className="text-center space-y-6 sm:space-y-8">
+                <div className="text-xl sm:text-2xl font-bold text-yellow-200 mb-4 sm:mb-6">
                   🃏 Dealer is playing...
                 </div>
-                <div className="flex justify-center gap-2">
+                <div className="flex justify-center gap-2 sm:gap-3 mb-4 sm:mb-6">
                   {dealerHand.map((card, index) => renderCard(card, false))}
                 </div>
-                <p className="text-yellow-200">
+                <p className="text-yellow-200 text-sm sm:text-base">
                   Dealer Value: {dealerValue}
                 </p>
               </div>
@@ -400,31 +403,31 @@ export const BlackjackProGame = ({ onBack, tokens, onTokensChange }: BlackjackPr
 
             {/* Game Result */}
             {gameState === 'finished' && (
-              <div className="text-center space-y-6">
+              <div className="text-center space-y-8 sm:space-y-10">
                 {/* Dealer's Final Hand */}
                 <div>
-                  <h3 className="text-xl font-bold text-yellow-200 mb-3">🃏 Dealer's Hand</h3>
-                  <div className="flex justify-center gap-2">
+                  <h3 className="text-lg sm:text-xl font-bold text-yellow-200 mb-4 sm:mb-6">🃏 Dealer's Hand</h3>
+                  <div className="flex justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
                     {dealerHand.map((card, index) => renderCard(card))}
                   </div>
-                  <p className="text-yellow-200 mt-2">
+                  <p className="text-yellow-200 text-sm sm:text-base">
                     Value: {dealerValue}
                   </p>
                 </div>
 
                 {/* Player's Final Hand */}
                 <div>
-                  <h3 className="text-xl font-bold text-yellow-200 mb-3">🎯 Your Hand</h3>
-                  <div className="flex justify-center gap-2">
+                  <h3 className="text-lg sm:text-xl font-bold text-yellow-200 mb-4 sm:mb-6">🎯 Your Hand</h3>
+                  <div className="flex justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
                     {playerHand.map((card, index) => renderCard(card))}
                   </div>
-                  <p className="text-yellow-200 mt-2">
+                  <p className="text-yellow-200 text-sm sm:text-base">
                     Value: {playerValue}
                   </p>
                 </div>
 
                 {/* Result Display */}
-                <div className={`text-3xl font-bold p-6 rounded-lg border-4 ${
+                <div className={`text-2xl sm:text-3xl font-bold p-4 sm:p-6 rounded-lg border-4 ${
                   gameResult === 'win' ? 'text-green-400 border-green-400 bg-green-400/10' :
                   gameResult === 'lose' ? 'text-red-400 border-red-400 bg-red-400/10' :
                   'text-yellow-400 border-yellow-400 bg-yellow-400/10'
@@ -434,12 +437,14 @@ export const BlackjackProGame = ({ onBack, tokens, onTokensChange }: BlackjackPr
                   {gameResult === 'push' && '🤝 PUSH 🤝'}
                 </div>
 
-                <Button
-                  onClick={resetGame}
-                  className="bg-gradient-to-r from-yellow-400 via-green-500 to-yellow-400 text-black border-2 border-yellow-400 shadow-lg shadow-yellow-400/50 hover:shadow-2xl hover:shadow-yellow-400/50 font-bold text-lg px-8 py-3"
-                >
-                  🎯 Play Again
-                </Button>
+                <div className="pt-4">
+                  <Button
+                    onClick={resetGame}
+                    className="bg-gradient-to-r from-yellow-400 via-green-500 to-yellow-400 text-black border-2 border-yellow-400 shadow-lg shadow-yellow-400/50 hover:shadow-2xl hover:shadow-yellow-400/50 font-bold text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 touch-target w-full sm:w-auto"
+                  >
+                    🎯 Play Again
+                  </Button>
+                </div>
               </div>
             )}
 
