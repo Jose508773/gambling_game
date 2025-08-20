@@ -41,6 +41,28 @@
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
   
+  /* Ensure buttons are always visible on mobile */
+  @media (max-width: 640px) {
+    .touch-target {
+      min-height: 48px !important;
+      min-width: 48px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      position: relative !important;
+      z-index: 50 !important;
+    }
+    
+    /* Force button visibility */
+    button[class*="bg-gradient-to-r"] {
+      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      position: relative !important;
+      z-index: 50 !important;
+    }
+  }
+  
   /* Improved mobile animations */
   @media (prefers-reduced-motion: reduce) {
     .animate-float,

@@ -25,7 +25,7 @@ export const GameCard = ({
   disabled = false 
 }: GameCardProps) => {
   return (
-    <Card className="bg-gradient-to-br from-black via-red-950 to-black border-4 border-yellow-400 hover:border-yellow-300 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-400/50 hover:-translate-y-2 hover:scale-105 group relative overflow-hidden h-full">
+    <Card className="bg-gradient-to-br from-black via-red-950 to-black border-4 border-yellow-400 hover:border-yellow-300 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-400/50 hover:-translate-y-2 hover:scale-105 group relative overflow-hidden flex flex-col min-h-[200px] sm:min-h-[220px]">
       {/* Casino lights shimmer */}
       <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 via-red-500/10 to-yellow-400/10 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
       <div className="absolute inset-0 rounded-lg border-2 border-yellow-400/50 animate-pulse-glow"></div>
@@ -49,31 +49,33 @@ export const GameCard = ({
         </div>
       </CardHeader>
       
-      <CardContent className="pt-0 relative z-10 bg-gradient-to-b from-transparent to-black/30 flex flex-col justify-between h-full">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-xs sm:text-sm text-yellow-200/80 w-full">
-            <div className="flex items-center gap-1">
-              <Coins className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 flex-shrink-0" />
-              <span className="font-bold text-yellow-200 truncate">💰 {minBet}-{maxBet} chips</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <Users className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 flex-shrink-0" />
-              <span className="font-bold text-yellow-200">👥 {players} playing</span>
-            </div>
+      <CardContent className="pt-0 relative z-10 bg-gradient-to-b from-transparent to-black/30 flex flex-col flex-1">
+        {/* Game info */}
+        <div className="flex flex-col gap-2 mb-4 flex-shrink-0">
+          <div className="flex items-center gap-1">
+            <Coins className="w-4 h-4 text-yellow-400 flex-shrink-0" />
+            <span className="font-bold text-yellow-200 text-sm">💰 {minBet}-{maxBet} chips</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Users className="w-4 h-4 text-yellow-400 flex-shrink-0" />
+            <span className="font-bold text-yellow-200 text-sm">👥 {players} playing</span>
           </div>
         </div>
         
-        <Button 
-          className="w-full bg-gradient-to-r from-yellow-400 via-red-500 to-yellow-400 hover:from-yellow-300 hover:via-red-400 hover:to-yellow-300 text-black font-bold hover:shadow-2xl hover:shadow-yellow-400/50 transition-all duration-300 hover:scale-105 relative overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base py-2 sm:py-3" 
-          onClick={onPlay}
-          disabled={disabled}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 hover:opacity-30 transition-opacity duration-300"></div>
-          <Trophy className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-          <span className="relative z-10">
-            {disabled ? "🔒 Coming Soon" : "🎰 Play Now! 🎰"}
-          </span>
-        </Button>
+        {/* Play button - always at bottom */}
+        <div className="mt-auto">
+          <Button 
+            className="w-full bg-gradient-to-r from-yellow-400 via-red-500 to-yellow-400 hover:from-yellow-300 hover:via-red-400 hover:to-yellow-300 text-black font-bold hover:shadow-2xl hover:shadow-yellow-400/50 transition-all duration-300 hover:scale-105 relative overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed text-base py-3 touch-target border-2 border-yellow-400/50 z-50" 
+            onClick={onPlay}
+            disabled={disabled}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 hover:opacity-30 transition-opacity duration-300"></div>
+            <Trophy className="w-4 h-4 mr-2" />
+            <span className="relative z-10 font-bold">
+              {disabled ? "🔒 Coming Soon" : "🎰 Play Now! 🎰"}
+            </span>
+          </Button>
+        </div>
       </CardContent>
       
       {/* Casino floating sparkles effect on hover */}
