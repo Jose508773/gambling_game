@@ -71,22 +71,22 @@ export const TokenDisplay = ({ tokens, onBuyTokens, isWatchingAd = false }: Toke
   }, [tokens, previousTokens]);
 
   return (
-    <div className="flex items-center gap-3 bg-gradient-to-br from-black via-red-950 to-black p-4 rounded-lg border-4 border-yellow-400 hover:border-yellow-300 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-400/50 hover:scale-105 group relative overflow-hidden">
+    <div className="flex items-center gap-2 sm:gap-3 bg-gradient-to-br from-black via-red-950 to-black p-3 sm:p-4 rounded-lg border-4 border-yellow-400 hover:border-yellow-300 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-400/50 hover:scale-105 group relative overflow-hidden">
       {/* Casino background shimmer effect */}
       <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 via-red-500/10 to-yellow-400/10 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
       <div className="absolute inset-0 rounded-lg border-2 border-yellow-400/50 animate-pulse-glow"></div>
       
-      <div className="flex items-center gap-2 relative z-10">
-        <div className="p-2 bg-yellow-400/20 rounded-full animate-spin" style={{animationDuration: '3s'}}>
-          <Coins className="w-6 h-6 text-yellow-400" />
+      <div className="flex items-center gap-1 sm:gap-2 relative z-10">
+        <div className="p-1.5 sm:p-2 bg-yellow-400/20 rounded-full animate-spin flex-shrink-0" style={{animationDuration: '3s'}}>
+          <Coins className="w-4 h-4 sm:w-6 sm:h-6 text-yellow-400" />
         </div>
       </div>
       
-      <div className="flex flex-col items-end gap-1">
+      <div className="flex flex-col items-end gap-1 min-w-0">
         <p className="text-xs text-yellow-200/80 font-bold">
           📺 Watch Ad
         </p>
-        <p className="text-lg font-bold bg-gradient-to-r from-green-400 to-green-300 bg-clip-text text-transparent">
+        <p className="text-sm sm:text-lg font-bold bg-gradient-to-r from-green-400 to-green-300 bg-clip-text text-transparent">
           +1000
         </p>
       </div>
@@ -95,7 +95,7 @@ export const TokenDisplay = ({ tokens, onBuyTokens, isWatchingAd = false }: Toke
         size="sm" 
         onClick={onBuyTokens}
         disabled={isWatchingAd}
-        className={`ml-auto relative z-10 text-black font-bold hover:shadow-2xl hover:shadow-yellow-400/50 transition-all duration-300 hover:scale-105 ${
+        className={`ml-auto relative z-10 text-black font-bold hover:shadow-2xl hover:shadow-yellow-400/50 transition-all duration-300 hover:scale-105 text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-2 ${
           isWatchingAd 
             ? 'bg-gradient-to-r from-gray-400 via-gray-500 to-gray-400 cursor-not-allowed opacity-50' 
             : 'bg-gradient-to-r from-yellow-400 via-red-500 to-yellow-400 hover:from-yellow-300 hover:via-red-400 hover:to-yellow-300'
@@ -103,13 +103,15 @@ export const TokenDisplay = ({ tokens, onBuyTokens, isWatchingAd = false }: Toke
       >
         {isWatchingAd ? (
           <>
-            <div className="w-4 h-4 mr-1 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
-            📺 Watching Ad...
+            <div className="w-3 h-3 sm:w-4 sm:h-4 mr-1 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
+            <span className="hidden sm:inline">📺 Watching Ad...</span>
+            <span className="sm:hidden">📺...</span>
           </>
         ) : (
           <>
-            <Plus className="w-4 h-4 mr-1" />
-            📺 Watch Ad (+1000)
+            <Plus className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+            <span className="hidden sm:inline">📺 Watch Ad (+1000)</span>
+            <span className="sm:hidden">📺 +1000</span>
           </>
         )}
       </Button>
