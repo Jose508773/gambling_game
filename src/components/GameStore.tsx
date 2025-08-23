@@ -89,8 +89,7 @@ const StoreItem = ({ title, description, price, type, rarity = "common", owned =
 };
 
 const gameItems = [
-  { title: "Poker Showdown", description: "5-card poker battles", price: 7500, type: "game" as const, rarity: "epic" as const },
-  { title: "Roulette Wheel", description: "Classic casino roulette game", price: 4000, type: "game" as const, rarity: "rare" as const },
+  // Games have been moved to the main games area
 ];
 
 const cosmeticItems = [
@@ -143,12 +142,8 @@ export const GameStore = ({ tokens, ownedItems, onPurchase }: GameStoreProps) =>
       </CardHeader>
       
       <CardContent className="relative z-10 bg-gradient-to-b from-transparent to-black/30">
-        <Tabs defaultValue="games" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 bg-gradient-to-r from-black via-red-950 to-black border-4 border-yellow-400 shadow-2xl shadow-yellow-400/30">
-            <TabsTrigger value="games" className="flex items-center gap-2 bg-transparent text-yellow-200 hover:bg-yellow-400/20 hover:text-yellow-400 data-[state=active]:bg-yellow-400 data-[state=active]:text-black font-bold">
-              <Gamepad2 className="w-4 h-4" />
-              🎲 Games
-            </TabsTrigger>
+        <Tabs defaultValue="cosmetics" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 bg-gradient-to-r from-black via-red-950 to-black border-4 border-yellow-400 shadow-2xl shadow-yellow-400/30">
             <TabsTrigger value="cosmetics" className="flex items-center gap-2 bg-transparent text-yellow-200 hover:bg-yellow-400/20 hover:text-yellow-400 data-[state=active]:bg-yellow-400 data-[state=active]:text-black font-bold">
               <Palette className="w-4 h-4" />
               🎨 Cosmetics
@@ -159,19 +154,7 @@ export const GameStore = ({ tokens, ownedItems, onPurchase }: GameStoreProps) =>
             </TabsTrigger>
           </TabsList>
           
-          <TabsContent value="games" className="mt-4">
-            <div className="grid gap-3">
-              {gameItems.map((item, index) => (
-                <StoreItem
-                  key={index}
-                  {...item}
-                  owned={ownedItems.includes(item.title)}
-                  canAfford={tokens >= item.price}
-                  onPurchase={() => handlePurchase(item.title, item.price)}
-                />
-              ))}
-            </div>
-          </TabsContent>
+
           
           <TabsContent value="cosmetics" className="mt-4">
             <div className="grid gap-3">

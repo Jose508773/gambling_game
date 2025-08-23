@@ -11,9 +11,11 @@ import { NumberGuessGame } from "@/components/games/NumberGuessGame";
 import { DiceRollerGame } from "@/components/games/DiceRollerGame";
 import { BlackjackProGame } from "@/components/games/BlackjackProGame";
 import { SlotsGame } from "@/components/games/SlotsGame";
+import { RouletteGame } from "@/components/games/RouletteGame";
+import { PokerShowdownGame } from "@/components/games/PokerShowdownGame";
 import { Gamepad2, Trophy, ShoppingCart, Coins, Zap, Clock, Star, Sparkles, Crown } from "lucide-react";
 
-type GameType = "lobby" | "coinflip" | "numberguess" | "diceroller" | "blackjackpro" | "slots";
+type GameType = "lobby" | "coinflip" | "numberguess" | "diceroller" | "blackjackpro" | "slots" | "roulette" | "pokershowdown";
 
 const Index = () => {
   const [currentGame, setCurrentGame] = useState<GameType>("lobby");
@@ -116,6 +118,34 @@ const Index = () => {
       <div className="min-h-screen bg-background p-2 sm:p-4">
         <div className="max-w-4xl mx-auto">
           <SlotsGame 
+            onBack={handleBackToLobby}
+            tokens={tokens}
+            onTokensChange={setTokens}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  if (currentGame === "roulette") {
+    return (
+      <div className="min-h-screen bg-background p-2 sm:p-4">
+        <div className="max-w-6xl mx-auto">
+          <RouletteGame 
+            onBack={handleBackToLobby}
+            tokens={tokens}
+            onTokensChange={setTokens}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  if (currentGame === "pokershowdown") {
+    return (
+      <div className="min-h-screen bg-background p-2 sm:p-4">
+        <div className="max-w-4xl mx-auto">
+          <PokerShowdownGame 
             onBack={handleBackToLobby}
             tokens={tokens}
             onTokensChange={setTokens}
@@ -304,6 +334,26 @@ const Index = () => {
                     maxBet={1000}
                     players={0}
                     onPlay={() => handlePlayGame("slots")}
+                  />
+                </div>
+                <div className="animate-bounce-in" style={{animationDelay: '3s'}}>
+                  <GameCard
+                    title="Roulette Wheel"
+                    description="Classic casino roulette with multiple betting options"
+                    minBet={100}
+                    maxBet={1000}
+                    players={0}
+                    onPlay={() => handlePlayGame("roulette")}
+                  />
+                </div>
+                <div className="animate-bounce-in" style={{animationDelay: '3.2s'}}>
+                  <GameCard
+                    title="Poker Showdown"
+                    description="5-card poker battles against AI opponents"
+                    minBet={100}
+                    maxBet={1000}
+                    players={0}
+                    onPlay={() => handlePlayGame("pokershowdown")}
                   />
                 </div>
               </div>
