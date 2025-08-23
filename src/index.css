@@ -75,8 +75,23 @@
     .animate-number-pop,
     .animate-heartbeat,
     .animate-wiggle,
-    .animate-particles {
+    .animate-particles,
+    .animate-spin-slow {
       animation: none;
+    }
+  }
+  
+  /* Slot machine spin animation */
+  .animate-spin-slow {
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotateY(0deg);
+    }
+    to {
+      transform: rotateY(360deg);
     }
   }
 }

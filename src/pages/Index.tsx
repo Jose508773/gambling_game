@@ -10,9 +10,10 @@ import { CoinFlipGame } from "@/components/games/CoinFlipGame";
 import { NumberGuessGame } from "@/components/games/NumberGuessGame";
 import { DiceRollerGame } from "@/components/games/DiceRollerGame";
 import { BlackjackProGame } from "@/components/games/BlackjackProGame";
+import { SlotsGame } from "@/components/games/SlotsGame";
 import { Gamepad2, Trophy, ShoppingCart, Coins, Zap, Clock, Star, Sparkles, Crown } from "lucide-react";
 
-type GameType = "lobby" | "coinflip" | "numberguess" | "diceroller" | "blackjackpro";
+type GameType = "lobby" | "coinflip" | "numberguess" | "diceroller" | "blackjackpro" | "slots";
 
 const Index = () => {
   const [currentGame, setCurrentGame] = useState<GameType>("lobby");
@@ -101,6 +102,20 @@ const Index = () => {
       <div className="min-h-screen bg-background p-2 sm:p-4">
         <div className="max-w-4xl mx-auto">
           <BlackjackProGame 
+            onBack={handleBackToLobby}
+            tokens={tokens}
+            onTokensChange={setTokens}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  if (currentGame === "slots") {
+    return (
+      <div className="min-h-screen bg-background p-2 sm:p-4">
+        <div className="max-w-4xl mx-auto">
+          <SlotsGame 
             onBack={handleBackToLobby}
             tokens={tokens}
             onTokensChange={setTokens}
@@ -279,6 +294,16 @@ const Index = () => {
                     maxBet={1000}
                     players={0}
                     onPlay={() => handlePlayGame("blackjackpro")}
+                  />
+                </div>
+                <div className="animate-bounce-in" style={{animationDelay: '2.8s'}}>
+                  <GameCard
+                    title="Slot Machine"
+                    description="Spin the reels and match symbols to win big"
+                    minBet={100}
+                    maxBet={1000}
+                    players={0}
+                    onPlay={() => handlePlayGame("slots")}
                   />
                 </div>
               </div>
